@@ -7,8 +7,6 @@ const { v4 : uuidv4 }= require('uuid');
 const methodOverride=require("method-override");
 app.use(methodOverride("_method"));
 
-const port=3000;
-
 app.use(express.urlencoded({extended: true}));
 
 
@@ -35,9 +33,14 @@ let posts=[
    }
 ];
 
-app.listen(port,()=>{
-  console.log("listening to port 3000");
-})
+// ✅ Fix: Use Render's provided PORT, fallback to 3000 for local dev
+const port = process.env.PORT || 3000;
+
+// ✅ Fix: Add home route so "Cannot GET /" doesn’t appear
+app.get("/", (req, res) => {
+  res.redirect("/posts"); // or res.send("Welcome to Quora App 🚀")
+});
+
 
 app.get("/posts",(req,res)=>{
   res.render("index.ejs",{posts});
@@ -81,3 +84,8 @@ app.delete("/posts/:id",(req,res)=>{
   posts=posts.filter((f)=> id !== f.id);
   res.redirect("/posts");
 })
+
+// ✅ Start server
+app.listen(port, () => {
+  console.log(`listening to port ${port}`);
+});
