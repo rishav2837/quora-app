@@ -2,6 +2,11 @@ h1 {
   color: maroon;
 }
 
+body {
+  background-color: rgb(154, 210, 210);
+}
+
+
 .post {
   background-color:blanchedalmond ;
 }
