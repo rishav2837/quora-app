@@ -33,12 +33,10 @@ let posts=[
    }
 ];
 
-// ✅ Fix: Use Render's provided PORT, fallback to 3000 for local dev
 const port = process.env.PORT || 3000;
 
-// ✅ Fix: Add home route so "Cannot GET /" doesn’t appear
 app.get("/", (req, res) => {
-  res.redirect("/posts"); // or res.send("Welcome to Quora App 🚀")
+  res.redirect("/posts"); 
 });
 
 
@@ -85,7 +83,6 @@ app.delete("/posts/:id",(req,res)=>{
   res.redirect("/posts");
 })
 
-// ✅ Start server
 app.listen(port, () => {
   console.log(`listening to port ${port}`);
 });
